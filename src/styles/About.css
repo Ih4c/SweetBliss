@@ -1,0 +1,59 @@
+.about {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .story {
+    margin-bottom: 3rem;
+  }
+  
+  .story h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .story p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  .team {
+    margin-top: 3rem;
+  }
+  
+  .team h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .team-member {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-member img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .team-member h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .team-member p {
+    font-size: 1rem;
+    color: #555;
+  }
