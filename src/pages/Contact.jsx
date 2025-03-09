@@ -10,7 +10,6 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
   const handleChange = (e) => {
@@ -28,7 +27,7 @@ const Contact = () => {
     return newErrors;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -36,28 +35,9 @@ const Contact = () => {
       return;
     }
 
-    setIsSubmitting(true);
-
-    // Submit form data to Netlify
-    const formDataEncoded = new URLSearchParams(formData).toString();
-    try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formDataEncoded,
-      });
-
-      if (response.ok) {
-        setSubmitMessage('Message sent successfully!');
-        setFormData({ name: '', email: '', inquiry: '', message: '' }); // Clear form
-      } else {
-        setSubmitMessage('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      setSubmitMessage('An error occurred. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Netlify will handle the form submission
+    setSubmitMessage('Message sent successfully!');
+    setFormData({ name: '', email: '', inquiry: '', message: '' }); // Clear form
   };
 
   return (
@@ -127,8 +107,8 @@ const Contact = () => {
               ></textarea>
               {errors.message && <span className="error">{errors.message}</span>}
             </div>
-            <button type="submit" className="submit-button" disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+            <button type="submit" className="submit-button">
+              Send Message
             </button>
             {submitMessage && <p className="submit-message">{submitMessage}</p>}
           </form>

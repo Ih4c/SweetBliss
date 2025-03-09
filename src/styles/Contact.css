@@ -97,3 +97,17 @@
     color: #ff6f61;
     text-align: center;
   }
+  /* Error message styles */
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Success message styles */
+.submit-message {
+  color: green;
+  font-size: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}

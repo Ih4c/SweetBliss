@@ -132,6 +132,7 @@ body {
   margin: 0.5rem 0;
 }
 
+/*
 .footer .social-links {
   margin-top: 1rem;
 }
@@ -145,6 +146,7 @@ body {
 .footer .social-links a:hover {
   text-decoration: underline;
 }
+*/
   
   .social-links {
     margin-top: 0.5rem;
@@ -158,6 +160,20 @@ body {
   
   .social-links a:hover {
     text-decoration: underline;
+  }
+  .social-links {
+    margin-top: 10px;
+  }
+  
+  .social-links a {
+    margin: 0 10px;
+    color: whitesmoke; /* Change the color of the icons */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    color: #0077b5; /* Change the hover color */
   }
 
   /* Ensure images and embedded content are responsive */
