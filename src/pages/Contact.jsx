@@ -11,6 +11,7 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +28,7 @@ const Contact = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -35,9 +36,33 @@ const Contact = () => {
       return;
     }
 
-    // Netlify will handle the form submission
-    setSubmitMessage('Message sent successfully!');
-    setFormData({ name: '', email: '', inquiry: '', message: '' }); // Clear form
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      // Send data to Google Sheets
+      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      const response = await fetch(proxyUrl + process.env.REACT_APP_CONTACT_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const result = await response.text();
+      if (result === 'Success') {
+        setSubmitMessage('Message sent successfully!');
+        setFormData({ name: '', email: '', inquiry: '', message: '' }); // Clear form
+      } else {
+        setSubmitMessage('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitMessage('Failed to submit. Please check your connection.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -47,13 +72,7 @@ const Contact = () => {
         {/* Contact Form */}
         <div className="contact-form">
           <h2>Send Us a Message</h2>
-          <form
-            name="contact-form"
-            method="POST"
-            data-netlify="true"
-            onSubmit={handleSubmit}
-          >
-            <input type="hidden" name="form-name" value="contact-form" />
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -107,8 +126,8 @@ const Contact = () => {
               ></textarea>
               {errors.message && <span className="error">{errors.message}</span>}
             </div>
-            <button type="submit" className="submit-button">
-              Send Message
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
             {submitMessage && <p className="submit-message">{submitMessage}</p>}
           </form>
@@ -134,7 +153,7 @@ const Contact = () => {
         <h2>Contact Information</h2>
         <p>Phone: +233 27 356 4989</p>
         <p>Email: info@sweetbliss.com</p>
-        <p>Address: 123 Sweet Street, Accra, Ghana</p>
+        <p>Address: 479 Sweet Street, Accra, Ghana</p>
         <p>Business Hours: Mon-Sat, 8:00 AM - 8:00 PM</p>
       </div>
     </div>

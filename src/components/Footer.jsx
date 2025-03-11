@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/global.css';
-import { FaInstagram, FaFacebook, FaTiktok } from 'react-icons/fa'; // Import the icons you need
+import { FaInstagram, FaEnvelope } from 'react-icons/fa'; // Import Instagram and Mail icons
 
 const Footer = () => {
   return (
@@ -10,11 +10,8 @@ const Footer = () => {
         <a href="https://instagram.com/sweetbliss_25" target="_blank" rel="noopener noreferrer">
           <FaInstagram size={24} /> {/* Instagram icon */}
         </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-          <FaFacebook size={24} /> {/* Facebook icon */}
-        </a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-          <FaTiktok size={24} /> {/* TikTok icon */}
+        <a href="mailto:egyasi122@gmail.com"> {/* Mailto link */}
+          <FaEnvelope size={24} /> {/* Mail icon */}
         </a>
       </div>
     </footer>
